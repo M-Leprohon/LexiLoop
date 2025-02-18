@@ -13,23 +13,25 @@ export default async function WordShow({ params }: WordShowProps) {
   const decodedWord = decodeURI(params.slug);
   const createTranslationAction = CreateTranslation.bind(null, decodedWord);
 
-  const authKey = '6536db4c-511c-411a-bd5d-6c02a2d043be:fx'; // Replace with your key
-  const translator = new deepl.Translator(authKey);
+  const authKey = process.env.DEEPL_API_KEY; // Replace with your key
+  let result: string = 'Problem with Deepl';
+  if (authKey) {
+    const translator = new deepl.Translator(authKey);
 
-  const returnedResult = await translator.translateText(
-    decodedWord,
-    'fi',
-    'en-GB'
-  );
-  const result: string = returnedResult.text; // Bonjour, le monde !
-
+    const returnedResult = await translator.translateText(
+      decodedWord,
+      'fi',
+      'en-GB'
+    );
+    result = returnedResult.text; // Bonjour, le monde !
+  }
   return (
     <>
       <div className="flex justify-center">
         <h1 className="text-6xl">{decodedWord}</h1>
       </div>
       <div className="flex justify-center mt-8">
-        <div className="w-6/12">
+        <div className="w-10/12 md:w-8/12 lg:w-6/12">
           <form className="flex" action={createTranslationAction}>
             <Input
               name="translation"

@@ -20,7 +20,9 @@ export default async function Header() {
   return (
     <header className="flex">
       <Navbar>
-        <Menu />
+        <Menu>
+          <UserMenu email={email} mode="mobile" logout={logout} />
+        </Menu>
       </Navbar>
       <UserMenu email={email} mode="header" logout={logout} />
     </header>
