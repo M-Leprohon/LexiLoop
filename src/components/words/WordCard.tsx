@@ -98,9 +98,7 @@ export const WordCard = (props: Props) => {
           onDrop={handleZoneDrop}
           onDragOver={handleZoneDragOver}
         >
-          <div className="self-center ml-20 -rotate-90 bold text-4xl">
-            {'Drag here if still struggling'}
-          </div>
+          <div className="self-center ml-20 -rotate-90 bold text-4xl">{''}</div>
         </div>
         <div className="flex items-center justify-center cursor-pointer">
           <div
@@ -120,10 +118,8 @@ export const WordCard = (props: Props) => {
                 draggable="true"
                 className="flip-card-front w-[100%] h-[100%] bg-cover text-black rounded-lg p-4 flex items-center justify-center"
               >
-                <div className="">
-                  <h2 className="text-5xl flex align-middle p-20 bg-neutral-200 rounded">
-                    {props.originalWord}
-                  </h2>
+                <div className="text-5xl flex align-middle p-20 text-white bg-sky-950 rounded-xl shadow-2xl h-[50vh]">
+                  {props.originalWord}
                 </div>
               </div>
 
@@ -132,7 +128,7 @@ export const WordCard = (props: Props) => {
                 draggable="true"
                 className="flip-card-back w-[100%] h-[100%] bg-cover text-black rounded-lg p-4 flex items-center justify-center"
               >
-                <h2 className="text-5xl p-20 bg-neutral-200 rounded">
+                <h2 className="text-5xl p-20 bg-sky-950 text-white rounded-xl h-[50vh] shadow-2xl">
                   {props.translatedWord}
                 </h2>
               </div>
@@ -147,9 +143,7 @@ export const WordCard = (props: Props) => {
           onDrop={handleZoneDrop}
           onDragOver={handleZoneDragOver}
         >
-          <div className="self-center mr-20 rotate-90 bold text-4xl">
-            {'Drag here if familiar'}
-          </div>
+          <div className="self-center mr-20 rotate-90 bold text-4xl">{''}</div>
         </div>
       </div>
     </>

@@ -1,51 +1,28 @@
-import {
-  Button,
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-} from '@nextui-org/react';
-import Link from 'next/link';
+import { Navbar } from '@nextui-org/react';
 import React from 'react';
-import SignOut from '@components/sign-out';
+import UserMenu from '@components/user-menu';
 import { createClient } from '@utils/supabase/server';
+import Menu from '@components/menu';
+import { redirect } from 'next/navigation';
 
 export default async function Header() {
   const supabase = createClient();
   const { data } = await supabase.auth.getUser();
-  const email = data.user?.email;
+  const email = data.user?.email || null;
+
+  const logout = async () => {
+    'use server';
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    redirect('/');
+  };
 
   return (
-    <Navbar>
-      <NavbarBrand>
-        <Link href="/">Vocabook</Link>
-      </NavbarBrand>
-      <NavbarContent>
-        <NavbarItem>
-          <Link href="/notebook">Notebook</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link href="/random">Random</Link>
-        </NavbarItem>
-
-        {email ? (
-          <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-            <NavbarItem>{email}</NavbarItem>
-            <NavbarItem>
-              <SignOut />
-            </NavbarItem>
-          </div>
-        ) : (
-          <>
-            <NavbarItem>
-              <Link href="/login">Login</Link>
-            </NavbarItem>
-            <NavbarItem>
-              <Link href="/register">Register</Link>
-            </NavbarItem>
-          </>
-        )}
-      </NavbarContent>
-    </Navbar>
+    <header className="flex">
+      <Navbar>
+        <Menu />
+      </Navbar>
+      <UserMenu email={email} mode="header" logout={logout} />
+    </header>
   );
 }
