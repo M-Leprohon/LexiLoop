@@ -4,9 +4,8 @@ import { ButtonRefresh } from '@components/ButtonRefresh';
 
 export default function Random() {
   return (
-    <div>
+    <>
       <WordRandomizer></WordRandomizer>
-      <ButtonRefresh></ButtonRefresh>
-    </div>
+    </>
   );
 }

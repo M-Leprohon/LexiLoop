@@ -26,7 +26,7 @@ export default async function TranslationShow({
     redirect(`/word/${params.slug}/translate`);
   }
   let output = (
-    <div>
+    <div className="flex flex-1 flex-col justify-center items-center">
       <WordCard
         originalWord={word?.original_word}
         translatedWord={word?.translated_word}

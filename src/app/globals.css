@@ -47,3 +47,7 @@
     #999
   );
 }
+
+.front, .back {
+  backface-visibility: hidden;
+}

@@ -12,10 +12,10 @@ export default async function UpdateFamiliarity(
 
   console.log('from server ' + familiarity);
 
-  if (familiarity == 'good') {
+  if (familiarity == 'right') {
     change = 1;
   }
-  if (familiarity == 'bad') {
+  if (familiarity == 'left') {
     change = -1;
   }
   const { error } = await supabase.rpc('increment', {
