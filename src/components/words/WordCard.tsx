@@ -12,15 +12,15 @@ interface WordCardProps {
   originalWord: string;
   translatedWord: string;
   handleRandomRequested?: () => void;
-  flip?: boolean;
 }
 
 export const WordCard = ({
   originalWord,
   translatedWord,
   handleRandomRequested,
-  flip,
 }: WordCardProps) => {
+  const [flip, setFlip] = useState(true);
+
   if (!originalWord) {
     return <p>Loading word...</p>;
   }
@@ -36,7 +36,7 @@ export const WordCard = ({
 
   return (
     <>
-      <div className="flex justify-center items-center tinder">
+      <div className="tinder">
         <TinderCard
           onSwipe={onSwipe}
           onCardLeftScreen={() => onCardLeftScreen(originalWord)}
@@ -71,6 +71,17 @@ export const WordCard = ({
             </motion.div>
           </motion.div>
         </TinderCard>
+        <div className="flex justify-center items-center">
+          <Button
+            className="flex"
+            onClick={() => setFlip((prevState) => !prevState)}
+          >
+            Flip
+          </Button>
+          <Button className="flex" onClick={handleRandomRequested}>
+            Random
+          </Button>
+        </div>
       </div>
     </>
   );

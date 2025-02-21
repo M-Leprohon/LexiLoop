@@ -43,7 +43,6 @@ export const WordCardWrapper = (props: WordCardWrapperProps) => {
           console.log('after timeout');
           setOriginalWord(data.word[0].original_word); // Ensure a new object reference
           setTranslatedWord(data.word[0].translated_word); // Ensure a new object reference
-          setFlip(true);
           console.log('after setWord');
           // Mount new card with fresh word
         }, 100); // Small delay for smooth UI transition
@@ -57,7 +56,7 @@ export const WordCardWrapper = (props: WordCardWrapperProps) => {
     }
   }, [fetchTrigger]);
   return (
-    <div>
+    <div className="flex flex-1 flex-col justify-center items-center">
       {originalWord ? (
         <>
           <WordCard
@@ -65,19 +64,7 @@ export const WordCardWrapper = (props: WordCardWrapperProps) => {
             originalWord={originalWord}
             translatedWord={translatedWord}
             handleRandomRequested={handleRandomRequested}
-            flip={flip}
           />
-          <div className="flex justify-center items-center">
-            <Button
-              className="flex"
-              onClick={() => setFlip((prevState) => !prevState)}
-            >
-              Flip
-            </Button>
-            <Button className="flex" onClick={handleRandomRequested}>
-              Random
-            </Button>
-          </div>
         </>
       ) : (
         <p>Loading...</p>
