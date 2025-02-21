@@ -1,5 +1,5 @@
 import { fetchWordBySlug } from '@db/words';
-import { WordCard } from '@components/words/WordCard';
+import { WordCardWrapper } from '@components/words/WordCardWrapper';
 import Link from 'next/link';
 //import randomWord from '@/components/words/WordRandomizer'
 import { redirect } from 'next/navigation';
@@ -27,7 +27,7 @@ export default async function TranslationShow({
   }
   let output = (
     <div className="flex flex-1 flex-col justify-center items-center">
-      <WordCard
+      <WordCardWrapper
         originalWord={word?.original_word}
         translatedWord={word?.translated_word}
       />

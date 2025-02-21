@@ -8,39 +8,38 @@ import { Button } from '@nextui-org/react';
 import { ButtonRefresh } from '@components/ButtonRefresh';
 import { useRouter } from 'next/navigation';
 
-interface Props {
-  originalWord?: string;
-  translatedWord?: string;
+interface WordCardProps {
+  originalWord: string;
+  translatedWord: string;
+  handleRandomRequested?: () => void;
+  flip: boolean;
 }
 
-export const WordCard = (props: Props) => {
-  const [flip, setFlip] = useState(true);
-  const [needAnother, setNeedAnother] = useState(false);
-  const router = useRouter();
-
-  //this.addEventListener('dragstart', handleDragStart, false);
-  const onSwipe = (direction: string) => {
-    console.log('You swiped: ' + direction);
-    UpdateFamiliarity(props.originalWord || '', direction);
-  };
-
-  useEffect(() => {
-    console.log('triggered', needAnother);
-    if (needAnother) {
-      router.push(`/random?refreshId=${new Date().getTime()}`);
-      router.refresh();
-    }
-  }, [needAnother]);
+export const WordCard = ({
+  originalWord,
+  translatedWord,
+  handleRandomRequested,
+  flip,
+}: WordCardProps) => {
+  if (!originalWord) {
+    return <p>Loading word...</p>;
+  }
   const onCardLeftScreen = (myIdentifier: string) => {
     console.log(myIdentifier + ' left the screen');
-    setNeedAnother(true);
+    originalWord = '';
+    handleRandomRequested && handleRandomRequested();
   };
+  const onSwipe = (direction: string) => {
+    console.log('You swiped: ' + direction);
+    UpdateFamiliarity(originalWord || '', direction);
+  };
+
   return (
     <>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center tinder">
         <TinderCard
           onSwipe={onSwipe}
-          onCardLeftScreen={() => onCardLeftScreen('fooBar')}
+          onCardLeftScreen={() => onCardLeftScreen(originalWord)}
           className=""
         >
           <motion.div
@@ -58,7 +57,7 @@ export const WordCard = (props: Props) => {
                 animate={{ rotateY: flip ? 0 : 180 }}
                 className="front absolute text-white text-4xl"
               >
-                {props.originalWord}
+                <div>{originalWord}</div>
               </motion.div>
               <motion.div
                 initial={{ rotateY: 180 }}
@@ -67,20 +66,11 @@ export const WordCard = (props: Props) => {
                 transition={{ duration: 0.7 }}
                 className="back absolute text-white text-4xl"
               >
-                {props.translatedWord}
+                <div>{translatedWord}</div>
               </motion.div>
             </motion.div>
           </motion.div>
         </TinderCard>
-      </div>
-      <div className="flex justify-center items-center">
-        <Button
-          className="flex"
-          onClick={() => setFlip((prevState) => !prevState)}
-        >
-          Flip
-        </Button>
-        <ButtonRefresh></ButtonRefresh>
       </div>
     </>
   );
