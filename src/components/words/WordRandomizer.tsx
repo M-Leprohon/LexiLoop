@@ -9,6 +9,7 @@ export default async function randomWord() {
     <WordCard
       originalWord={word[0].original_word}
       translatedWord={word[0].translated_word}
+      flip={true}
     ></WordCard>
   ) : (
     <div>Word not found</div>

@@ -12,7 +12,7 @@ interface WordCardProps {
   originalWord: string;
   translatedWord: string;
   handleRandomRequested?: () => void;
-  flip: boolean;
+  flip?: boolean;
 }
 
 export const WordCard = ({
