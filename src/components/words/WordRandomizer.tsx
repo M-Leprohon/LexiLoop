@@ -1,4 +1,4 @@
-import { WordCard } from '@components/words/WordCard';
+import { WordCardWrapper } from '@components/words/WordCardWrapper';
 import { createClient } from '@utils/supabase/server';
 
 export default async function randomWord() {
@@ -6,11 +6,10 @@ export default async function randomWord() {
   const { data: word } = await supabase.from('random_word').select().limit(1);
 
   return word ? (
-    <WordCard
+    <WordCardWrapper
       originalWord={word[0].original_word}
       translatedWord={word[0].translated_word}
-      flip={true}
-    ></WordCard>
+    ></WordCardWrapper>
   ) : (
     <div>Word not found</div>
   );
