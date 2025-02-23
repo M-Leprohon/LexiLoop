@@ -16,16 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html className="h-full" lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className={inter.className}>
-        <div className="container mx-auto px-4 max-w-6xl">
-          <Providers>
-            <Header />
-            {children}
-          </Providers>
+      <body className={`h-full ${inter.className}`}>
+        <div className="h-full container mx-auto px-4 max-w-6xl">
+          <Header />
+          <div className="h-full main-content">{children}</div>
         </div>
       </body>
     </html>

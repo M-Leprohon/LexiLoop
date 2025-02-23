@@ -9,7 +9,9 @@ interface UserMenuProps {
 
 export default function UserMenu({ mode, email, logout }: UserMenuProps) {
   return (
-    <div className={mode === 'header' ? 'max-md:hidden' : 'md:hidden'}>
+    <div
+      className={`ml-auto ${mode === 'header' ? 'max-md:hidden' : 'md:hidden'}`}
+    >
       {email ? (
         <div className="flex">
           <div className="flex mr-8">{email}</div>

@@ -1,15 +1,6 @@
 'use client';
-
 import React from 'react';
-import {
-  NavbarBrand,
-  NavbarContent,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-} from '@nextui-org/react';
 import Link from 'next/link';
-import UserMenu from '@components/user-menu';
 
 interface MenuProps {
   children: React.ReactNode;
@@ -18,38 +9,45 @@ interface MenuProps {
 export default function Menu(props: MenuProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const menuItems = ['random', 'notebook'];
-  return (
-    <>
-      <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        />
-        <NavbarBrand>
-          <Link href="/">LexiLoop</Link>
-        </NavbarBrand>
 
-        <NavbarMenu>
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                className="w-full"
-                color={
-                  index === 2
-                    ? 'warning'
-                    : index === menuItems.length - 1
-                    ? 'danger'
-                    : 'foreground'
-                }
-                href={item}
-              >
-                {item}
-              </Link>
-            </NavbarMenuItem>
+  return (
+    <div className="relative">
+      <button
+        className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        <svg
+          className="h-6 w-6 text-black"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M4 6h16M4 12h16m-7 6h7"
+          />
+        </svg>
+      </button>
+
+      {isMenuOpen && (
+        <nav className="absolute -left-full h-screen w-screen bg-white rounded-md shadow-lg py-1 z-20 p-12">
+          {menuItems.map((item) => (
+            <Link
+              className="block mb-2"
+              key={item}
+              href={`/${item}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item}
+            </Link>
           ))}
           {props.children}
-        </NavbarMenu>
-      </NavbarContent>
-    </>
+        </nav>
+      )}
+    </div>
   );
 }

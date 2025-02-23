@@ -28,6 +28,7 @@ export default function Home() {
             label=""
             labelPlacement="outside"
             placeholder="Enter a word to translate"
+            autoComplete="false"
           />
           {messages?.errors.original_word?.map((error, i) => {
             return (

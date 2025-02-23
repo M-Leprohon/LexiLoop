@@ -43,35 +43,35 @@ export const WordCard = ({
           className=""
         >
           <motion.div
-            className="w-[60vw] h-[60vh] flex-1 flex flex-col justify-center items-center"
+            className="w-[60vw] h-[50vh] md:h-[30vh] flex-1 flex flex-col justify-center items-center"
             transition={{ duration: 0.7 }}
             animate={{ rotateY: flip ? 0 : 180 }}
           >
             <motion.div
               transition={{ duration: 0.7 }}
               animate={{ rotateY: flip ? 0 : 180 }}
-              className="Card bg-sky-600  w-full h-full flex-1 flex flex-col justify-center items-center rounded-2xl"
+              className="Card shadow-md bg-sky-600 md:w-48 w-full flex-1 flex flex-col justify-center items-center rounded-2xl"
             >
               <motion.div
                 transition={{ duration: 0.7 }}
                 animate={{ rotateY: flip ? 0 : 180 }}
-                className="front absolute text-white text-4xl"
+                className="front absolute text-white text-4xl break-all hyphens-auto whitespace-normal"
               >
-                <div>{originalWord}</div>
+                {originalWord}
               </motion.div>
               <motion.div
                 initial={{ rotateY: 180 }}
                 animate={{ rotateY: flip ? 180 : 0 }}
                 // style={{ display: flip ? "none" : "block" }}
                 transition={{ duration: 0.7 }}
-                className="back absolute text-white text-4xl"
+                className="back absolute text-white text-4xl break-all hyphens-auto whitespace-normal"
               >
-                <div>{translatedWord}</div>
+                {translatedWord}
               </motion.div>
             </motion.div>
           </motion.div>
         </TinderCard>
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center mt-4">
           <Button
             className="flex"
             onClick={() => setFlip((prevState) => !prevState)}

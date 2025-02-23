@@ -4,6 +4,7 @@ import UserMenu from '@components/user-menu';
 import { createClient } from '@utils/supabase/server';
 import Menu from '@components/menu';
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 
 export default async function Header() {
   const supabase = createClient();
@@ -18,12 +19,11 @@ export default async function Header() {
   };
 
   return (
-    <header className="flex">
-      <Navbar>
-        <Menu>
-          <UserMenu email={email} mode="mobile" logout={logout} />
-        </Menu>
-      </Navbar>
+    <header className="flex items-center justify-start mb-6">
+      <Menu>
+        <UserMenu email={email} mode="mobile" logout={logout} />
+      </Menu>
+      <Link href="/">LexiLoop</Link>
       <UserMenu email={email} mode="header" logout={logout} />
     </header>
   );
