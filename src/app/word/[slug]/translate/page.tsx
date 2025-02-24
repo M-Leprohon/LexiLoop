@@ -43,7 +43,6 @@ export default async function WordShow({ params }: WordShowProps) {
             <input name="slug" type="hidden" value={decodedWord} />
             <Button type="submit">Submit</Button>
           </form>
-          q{' '}
           <div className="pt-10">
             Suggested translation from Deepl (Finnish only): {result}
           </div>

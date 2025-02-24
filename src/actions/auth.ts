@@ -41,3 +41,11 @@ export async function signup(formData: FormData) {
   revalidatePath('/', 'layout');
   redirect('/auth/notification');
 }
+
+export async function anonymousLogin() {
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.signInAnonymously();
+  console.log(data);
+  console.log(error);
+  redirect('/');
+}
