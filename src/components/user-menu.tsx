@@ -1,5 +1,7 @@
-import { NavbarContent, NavbarItem } from '@nextui-org/react';
+'use client';
+
 import Link from 'next/link';
+import { useMenu } from '@context/MenuContext';
 
 interface UserMenuProps {
   mode: string;
@@ -8,6 +10,8 @@ interface UserMenuProps {
 }
 
 export default function UserMenu({ mode, email, logout }: UserMenuProps) {
+  const { setIsMenuOpen } = useMenu();
+
   return (
     <div
       className={`ml-auto ${mode === 'header' ? 'max-md:hidden' : 'md:hidden'}`}
@@ -27,10 +31,13 @@ export default function UserMenu({ mode, email, logout }: UserMenuProps) {
       ) : (
         <div>
           <span>
-            <Link href="/login">Login</Link>
-          </span>
-          <span>
-            <Link href="/register">Register</Link>
+            <Link
+              className="block mb-2"
+              href="/login"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Login
+            </Link>
           </span>
         </div>
       )}

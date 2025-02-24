@@ -24,6 +24,7 @@
       "@db/*": ["db/*"],
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
+      "@context/*": ["context/*"],
     },
     "plugins": [
       {

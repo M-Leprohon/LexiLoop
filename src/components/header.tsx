@@ -1,8 +1,7 @@
-import { Navbar } from '@nextui-org/react';
 import React from 'react';
-import UserMenu from '@components/user-menu';
+import UserMenu from '@components/User-menu';
 import { createClient } from '@utils/supabase/server';
-import Menu from '@components/menu';
+import Menu from '@components/Menu';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 

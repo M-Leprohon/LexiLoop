@@ -1,12 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import UpdateFamiliarity from '../../actions/update-familiarity';
 import TinderCard from 'react-tinder-card';
 import { Button } from '@nextui-org/react';
-import { ButtonRefresh } from '@components/ButtonRefresh';
-import { useRouter } from 'next/navigation';
 
 interface WordCardProps {
   originalWord: string;
@@ -26,7 +24,6 @@ export const WordCard = ({
   }
   const onCardLeftScreen = (myIdentifier: string) => {
     console.log(myIdentifier + ' left the screen');
-    originalWord = '';
     handleRandomRequested && handleRandomRequested();
   };
   const onSwipe = (direction: string) => {

@@ -1,13 +1,14 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
+import { useMenu } from '@context/MenuContext';
 
 interface MenuProps {
   children: React.ReactNode;
 }
 
 export default function Menu(props: MenuProps) {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { isMenuOpen, setIsMenuOpen } = useMenu();
   const menuItems = ['random', 'notebook'];
 
   return (

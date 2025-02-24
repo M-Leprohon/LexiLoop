@@ -1,12 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import UpdateFamiliarity from '../../actions/update-familiarity';
-import TinderCard from 'react-tinder-card';
-import { Button } from '@nextui-org/react';
-import { ButtonRefresh } from '@components/ButtonRefresh';
-import { useRouter } from 'next/navigation';
 import { WordCard } from './WordCard';
 
 interface WordCardWrapperProps {
@@ -17,7 +11,6 @@ export const WordCardWrapper = (props: WordCardWrapperProps) => {
   const [originalWord, setOriginalWord] = useState(props.originalWord);
   const [translatedWord, setTranslatedWord] = useState(props.translatedWord);
   const [fetchTrigger, setFetchTrigger] = useState(0);
-  const [flip, setFlip] = useState(true);
 
   const handleRandomRequested = () => {
     console.log('Button clicked, fetching new word...');
@@ -55,6 +48,7 @@ export const WordCardWrapper = (props: WordCardWrapperProps) => {
       getRandomWord();
     }
   }, [fetchTrigger]);
+
   return (
     <div className="flex flex-1 flex-col justify-center items-center">
       {originalWord ? (
