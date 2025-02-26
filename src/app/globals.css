@@ -51,3 +51,7 @@
 .front, .back {
   backface-visibility: hidden;
 }
+
+.text-shadow {
+  text-shadow: 2px 2px 0px #fff;
+}

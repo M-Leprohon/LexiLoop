@@ -4,6 +4,7 @@ import { createClient } from '@utils/supabase/server';
 import Menu from '@components/Menu';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import Notification from './Notification';
 
 export default async function Header() {
   const supabase = createClient();
@@ -23,6 +24,7 @@ export default async function Header() {
         <UserMenu email={email} mode="mobile" logout={logout} />
       </Menu>
       <Link href="/">LexiLoop</Link>
+      <Notification />
       <UserMenu email={email} mode="header" logout={logout} />
     </header>
   );

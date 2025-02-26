@@ -10,12 +10,14 @@ interface WordCardProps {
   originalWord: string;
   translatedWord: string;
   handleRandomRequested?: () => void;
+  handleWeightedRandomRequested?: () => void;
 }
 
 export const WordCard = ({
   originalWord,
   translatedWord,
   handleRandomRequested,
+  handleWeightedRandomRequested,
 }: WordCardProps) => {
   const [flip, setFlip] = useState(true);
 
@@ -24,7 +26,7 @@ export const WordCard = ({
   }
   const onCardLeftScreen = (myIdentifier: string) => {
     console.log(myIdentifier + ' left the screen');
-    handleRandomRequested && handleRandomRequested();
+    handleWeightedRandomRequested && handleWeightedRandomRequested();
   };
   const onSwipe = (direction: string) => {
     console.log('You swiped: ' + direction);
@@ -40,19 +42,19 @@ export const WordCard = ({
           className=""
         >
           <motion.div
-            className="w-[60vw] h-[50vh] md:h-[30vh] flex-1 flex flex-col justify-center items-center"
+            className="w-[60vw] h-[40vh] md:h-[30vh] flex-1 flex flex-col justify-center items-center"
             transition={{ duration: 0.7 }}
             animate={{ rotateY: flip ? 0 : 180 }}
           >
             <motion.div
               transition={{ duration: 0.7 }}
               animate={{ rotateY: flip ? 0 : 180 }}
-              className="Card shadow-md bg-sky-600 md:w-48 w-full flex-1 flex flex-col justify-center items-center rounded-2xl"
+              className="Card text-shadow @apply shadow-[rgba(0,0,0,0.19)_0px_10px_20px,rgba(0,0,0,0.23)_0px_6px_6px] @apply bg-[#8EC5FC] bg-[linear-gradient(62deg,#8EC5FC_0%,#E0C3FC_100%)] md:w-48 w-full flex-1 flex flex-col justify-center items-center rounded-2xl text-black text-4xl break-all hyphens-auto whitespace-normal"
             >
               <motion.div
                 transition={{ duration: 0.7 }}
                 animate={{ rotateY: flip ? 0 : 180 }}
-                className="front absolute text-white text-4xl break-all hyphens-auto whitespace-normal"
+                className="front absolute"
               >
                 {originalWord}
               </motion.div>
@@ -61,22 +63,19 @@ export const WordCard = ({
                 animate={{ rotateY: flip ? 180 : 0 }}
                 // style={{ display: flip ? "none" : "block" }}
                 transition={{ duration: 0.7 }}
-                className="back absolute text-white text-4xl break-all hyphens-auto whitespace-normal"
+                className="back absolute"
               >
                 {translatedWord}
               </motion.div>
             </motion.div>
           </motion.div>
         </TinderCard>
-        <div className="flex justify-center items-center mt-4">
+        <div className="flex justify-center items-center mt-6">
           <Button
             className="flex"
             onClick={() => setFlip((prevState) => !prevState)}
           >
             Flip
-          </Button>
-          <Button className="flex" onClick={handleRandomRequested}>
-            Random
           </Button>
         </div>
       </div>
