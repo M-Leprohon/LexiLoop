@@ -20,7 +20,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className={`h-full ${inter.className}`}>
+      <body className={`h-full max-w-full overflow-hidden ${inter.className}`}>
         <div className="h-full container mx-auto px-4 max-w-6xl">
           <MenuProvider>
             <Header />

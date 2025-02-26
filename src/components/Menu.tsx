@@ -9,7 +9,7 @@ interface MenuProps {
 
 export default function Menu(props: MenuProps) {
   const { isMenuOpen, setIsMenuOpen } = useMenu();
-  const menuItems = ['random', 'notebook'];
+  const menuItems = ['Random', 'Notebook'];
 
   return (
     <div className="relative">
@@ -40,7 +40,7 @@ export default function Menu(props: MenuProps) {
             <Link
               className="block mb-2"
               key={item}
-              href={`/${item}`}
+              href={`/${item.toLowerCase()}`}
               onClick={() => setIsMenuOpen(false)}
             >
               {item}

@@ -13,9 +13,7 @@ export default function UserMenu({ mode, email, logout }: UserMenuProps) {
   const { setIsMenuOpen } = useMenu();
 
   return (
-    <div
-      className={`ml-auto ${mode === 'header' ? 'max-md:hidden' : 'md:hidden'}`}
-    >
+    <div className={`${mode === 'header' ? 'max-md:hidden' : 'md:hidden'}`}>
       {email ? (
         <div className="flex">
           <div className="flex mr-8">{email}</div>
@@ -32,7 +30,7 @@ export default function UserMenu({ mode, email, logout }: UserMenuProps) {
         <div>
           <span>
             <Link
-              className="block mb-2"
+              className="block"
               href="/login"
               onClick={() => setIsMenuOpen(false)}
             >

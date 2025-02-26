@@ -19,13 +19,15 @@ export default async function Header() {
   };
 
   return (
-    <header className="flex items-center justify-start mb-6">
+    <header className="flex items-center justify-start mb-6 mt-4">
       <Menu>
         <UserMenu email={email} mode="mobile" logout={logout} />
       </Menu>
       <Link href="/">LexiLoop</Link>
-      <Notification />
-      <UserMenu email={email} mode="header" logout={logout} />
+      <div className="ml-auto flex items-center">
+        <Notification />
+        <UserMenu email={email} mode="header" logout={logout} />
+      </div>
     </header>
   );
 }
