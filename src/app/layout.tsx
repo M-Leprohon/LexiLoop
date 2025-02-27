@@ -22,7 +22,10 @@ export default function RootLayout({
   return (
     <html className="h-full text-base" lang="en">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0 maximum-scale=1"
+        />
       </head>
       <body className={`h-full max-w-full ${inter.className}`}>
         <div className="h-full container mx-auto px-4 max-w-6xl">
