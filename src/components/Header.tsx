@@ -23,7 +23,9 @@ export default async function Header() {
       <Menu>
         <UserMenu email={email} mode="mobile" logout={logout} />
       </Menu>
-      <Link href="/">LexiLoop</Link>
+      <Link className="mr-4" href="/">
+        LexiLoop
+      </Link>
       <div className="ml-auto flex items-center">
         <Notification />
         <UserMenu email={email} mode="header" logout={logout} />

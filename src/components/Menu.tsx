@@ -9,7 +9,10 @@ interface MenuProps {
 
 export default function Menu(props: MenuProps) {
   const { isMenuOpen, setIsMenuOpen } = useMenu();
-  const menuItems = ['Random', 'Notebook'];
+  const menuItems = [
+    { name: 'Random', path: 'random' },
+    { name: 'My words', path: 'words' },
+  ];
 
   return (
     <div className="relative">
@@ -39,11 +42,11 @@ export default function Menu(props: MenuProps) {
           {menuItems.map((item) => (
             <Link
               className="block mb-2"
-              key={item}
-              href={`/${item.toLowerCase()}`}
+              key={item.name}
+              href={`/${item.path}`}
               onClick={() => setIsMenuOpen(false)}
             >
-              {item}
+              {item.name}
             </Link>
           ))}
           {props.children}

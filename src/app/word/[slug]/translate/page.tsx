@@ -1,7 +1,6 @@
-import { Button, Input } from '@nextui-org/react';
 import { CreateTranslation } from '../../../../actions/create-translation';
-import { TranslatedWord } from '../../../../components/words/TranslatedWord';
 import * as deepl from 'deepl-node';
+import TranslateForm from './TranslateForm';
 
 interface WordShowProps {
   params: {
@@ -32,17 +31,7 @@ export default async function WordShow({ params }: WordShowProps) {
       </div>
       <div className="flex justify-center mt-8">
         <div className="w-10/12 md:w-8/12 lg:w-6/12">
-          <form className="flex" action={createTranslationAction}>
-            <Input
-              name="translation"
-              label=""
-              labelPlacement="outside"
-              placeholder="Enter the translation"
-              autoComplete="false"
-            />
-            <input name="slug" type="hidden" value={decodedWord} />
-            <Button type="submit">Submit</Button>
-          </form>
+          <TranslateForm word={decodedWord} />
           <div className="pt-10">
             Suggested translation from Deepl (Finnish only): {result}
           </div>

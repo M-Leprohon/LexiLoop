@@ -4,11 +4,16 @@ import { Input, Button } from '@nextui-org/react';
 import { createTerm, CreateWordFormState } from 'actions/create-term';
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useLoading } from '../context/LoadingContext';
 
 export default function Home() {
   const [messages, setMessages] = useState<CreateWordFormState | null>(null);
+  const { isLoading, setLoading } = useLoading();
+
   const router = useRouter();
   const handleSubmit = async (e: FormEvent) => {
+    setLoading(true);
+    console.log('loading status:', isLoading);
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
@@ -42,7 +47,9 @@ export default function Home() {
                 </li>
               );
             })}
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? 'Submitting...' : 'Submit'}
+            </Button>
           </form>
           {messages?.errors._form ? (
             <div className="text-red-500 text-xs pt-1 pl-1">

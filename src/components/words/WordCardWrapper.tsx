@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { WordCard } from './WordCard';
 import { Word } from 'types';
+import { useLoading } from '@context/LoadingContext';
+
 interface WordCardWrapperProps {
   originalWord: string;
   translatedWord: string;
@@ -13,7 +15,7 @@ export const WordCardWrapper = (props: WordCardWrapperProps) => {
   const [fetchTrigger, setFetchTrigger] = useState(0);
   const [fetchWeightedTrigger, setFetchWeightedTrigger] = useState(0);
   const [words, setWords] = useState<Word[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { isLoading, setLoading } = useLoading();
 
   const handleRandomRequested = () => {
     console.log('Button clicked, fetching new word...');
@@ -59,6 +61,8 @@ export const WordCardWrapper = (props: WordCardWrapperProps) => {
 
   useEffect(() => {
     const fetchWords = async () => {
+      setLoading(true);
+
       const res = await fetch('/api/word/weighted', {
         method: 'POST',
         headers: {
@@ -76,6 +80,7 @@ export const WordCardWrapper = (props: WordCardWrapperProps) => {
           setTranslatedWord(data.word.translated_word);
         } // Ensure a new object reference
         console.log('after setWord');
+        setLoading(false);
         // Mount new card with fresh word
       }, 100);
     };
@@ -86,6 +91,7 @@ export const WordCardWrapper = (props: WordCardWrapperProps) => {
   }, [fetchWeightedTrigger]);
 
   useEffect(() => {
+    setLoading(false);
     const fetchWords = async () => {
       setLoading(true);
       console.log('yeah?');
