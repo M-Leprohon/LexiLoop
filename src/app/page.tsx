@@ -22,6 +22,7 @@ export default function Home() {
     const res = await createTerm(formData);
     setMessages(res);
     if (res.success) router.push(`/word/${res.encodedWord}/translate`);
+    if (res.errors._form && res.errors._form?.length > 0) setLoading(false);
   };
 
   return (
