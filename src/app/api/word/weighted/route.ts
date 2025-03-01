@@ -33,7 +33,7 @@ export const selectWord = (
   words: Word[],
   k: number = 1.0,
   c: number = 5,
-  epsilon: number = 0.2
+  epsilon: number = 0.1
 ): Word | null => {
   if (words.length === 0) return null;
 
