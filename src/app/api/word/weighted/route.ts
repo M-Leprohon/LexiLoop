@@ -26,19 +26,21 @@ const sigmoid = (x: number, k: number, c: number): number => {
  * @param words - List of words with familiarity scores.
  * @param k - Slope of sigmoid function (default 1.5).
  * @param c - Familiarity threshold where probability declines (default 5).
+ * @param epsilon - Small baseline weight for all words.
  * @returns Selected word.
  */
 export const selectWord = (
   words: Word[],
-  k: number = 1.5,
-  c: number = 5
+  k: number = 1.2,
+  c: number = 5,
+  epsilon: number = 0.05
 ): Word | null => {
   if (words.length === 0) return null;
 
   // Compute weights using inverse familiarity probability
   const weights = words.map((w) => ({
     word: w,
-    weight: sigmoid(parseInt(w.familiarity), k, c),
+    weight: sigmoid(parseInt(w.familiarity), k, c) + epsilon, // Ensure minimum probability
   }));
 
   // Normalize weights
