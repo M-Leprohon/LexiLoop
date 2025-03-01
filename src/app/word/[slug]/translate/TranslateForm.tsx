@@ -16,6 +16,7 @@ export default function TranslateForm(props: { word: string }) {
   return (
     <form className="flex" action={createTranslationAction}>
       <input
+        type="text"
         name="translation"
         placeholder="Enter the translation"
         autoComplete="false"

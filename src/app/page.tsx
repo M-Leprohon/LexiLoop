@@ -32,6 +32,7 @@ export default function Home() {
         <div className="w-10/12 md:w-8/12 lg:w-6/12">
           <form className="flex" onSubmit={handleSubmit}>
             <input
+              type="text"
               name="word"
               placeholder="Enter a word to translate"
               autoComplete="false"
