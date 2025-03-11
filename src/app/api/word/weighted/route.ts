@@ -5,9 +5,9 @@ import { Word } from 'types';
 export async function GET() {
   const supabase = createClient();
   const { data: words } = await supabase.from('word').select();
-  console.log('we got this data from server', words);
   return Response.json({ words });
 }
+
 export async function POST(request: Request) {
   const body = await request.json();
   let word = selectWord(body.words);

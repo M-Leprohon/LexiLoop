@@ -7,10 +7,7 @@ export default async function randomWord() {
   const { data: word } = await supabase.from('random_word').select().limit(1);
   console.log(word);
   return word && word?.length > 0 ? (
-    <WordCardWrapper
-      originalWord={word[0].original_word}
-      translatedWord={word[0].translated_word}
-    ></WordCardWrapper>
+    <WordCardWrapper />
   ) : (
     <div>
       No words found,{' '}

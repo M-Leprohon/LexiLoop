@@ -21,7 +21,7 @@ export default function Menu(props: MenuProps) {
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         <svg
-          className="h-6 w-6 text-black"
+          className="h-6 w-6"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -38,7 +38,7 @@ export default function Menu(props: MenuProps) {
       </button>
 
       {isMenuOpen && (
-        <nav className="absolute -left-full h-screen w-screen bg-white rounded-md shadow-lg py-1 z-20 p-12">
+        <nav className="absolute -left-full h-screen w-screen bg-white dark:bg-black rounded-md shadow-lg py-1 z-20 p-12">
           {menuItems.map((item) => (
             <Link
               className="block mb-2"

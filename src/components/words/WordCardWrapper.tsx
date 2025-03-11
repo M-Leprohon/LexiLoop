@@ -4,60 +4,22 @@ import { useEffect, useState } from 'react';
 import { WordCard } from './WordCard';
 import { Word } from 'types';
 import { useLoading } from '@context/LoadingContext';
+import { Switch } from '@nextui-org/react';
+import { useInverse } from '@context/InverseContext';
 
-interface WordCardWrapperProps {
-  originalWord: string;
-  translatedWord: string;
-}
-export const WordCardWrapper = (props: WordCardWrapperProps) => {
-  const [originalWord, setOriginalWord] = useState(props.originalWord);
-  const [translatedWord, setTranslatedWord] = useState(props.translatedWord);
-  const [fetchTrigger, setFetchTrigger] = useState(0);
+export const WordCardWrapper = () => {
+  const [originalWord, setOriginalWord] = useState('');
+  const [translatedWord, setTranslatedWord] = useState<string>('');
   const [fetchWeightedTrigger, setFetchWeightedTrigger] = useState(0);
   const [words, setWords] = useState<Word[]>([]);
   const { isLoading, setLoading } = useLoading();
-
-  const handleRandomRequested = () => {
-    console.log('Button clicked, fetching new word...');
-    setFetchTrigger((prev) => prev + 1);
-  };
+  const { isInverse, setIsInverse } = useInverse();
+  const [isSentenceMode, setIsSentenceMode] = useState(false);
 
   const handleWeightedRandomRequested = () => {
     console.log('Button clicked, fetching new weighted word...');
     setFetchWeightedTrigger((prev) => prev + 1);
   };
-
-  useEffect(() => {
-    const getRandomWord = async () => {
-      try {
-        console.log('Fetching new word...');
-        const response = await fetch('/api/word/random');
-        const data = await response.json();
-
-        if (!data.word || data.word.length === 0) {
-          console.error('Invalid data received:', data);
-          return;
-        }
-
-        console.log('Fetched data:', data.word[0]);
-        //setWord(null); // Unmount old card first
-
-        setTimeout(() => {
-          console.log('after timeout');
-          setOriginalWord(data.word[0].original_word); // Ensure a new object reference
-          setTranslatedWord(data.word[0].translated_word); // Ensure a new object reference
-          console.log('after setWord');
-          // Mount new card with fresh word
-        }, 100); // Small delay for smooth UI transition
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    if (fetchTrigger > 0) {
-      getRandomWord();
-    }
-  }, [fetchTrigger]);
 
   useEffect(() => {
     const fetchWords = async () => {
@@ -74,12 +36,10 @@ export const WordCardWrapper = (props: WordCardWrapperProps) => {
       console.log(data);
 
       setTimeout(() => {
-        console.log('after timeout');
         if (data.word) {
           setOriginalWord(data.word.original_word);
           setTranslatedWord(data.word.translated_word);
         } // Ensure a new object reference
-        console.log('after setWord');
         setLoading(false);
         // Mount new card with fresh word
       }, 100);
@@ -93,34 +53,47 @@ export const WordCardWrapper = (props: WordCardWrapperProps) => {
   useEffect(() => {
     setLoading(false);
     const fetchWords = async () => {
-      setLoading(true);
-      console.log('yeah?');
       try {
-        console.log('yesssah?');
+        console.log('yesssah?', isSentenceMode);
 
-        const res = await fetch('/api/word/words');
+        const res = await fetch(
+          `/api/word/words?sentence_mode=${isSentenceMode}`
+        );
         const data = await res.json();
         setWords(data.words);
-        //setCurrentWord(selectWord(data)); // Set initial word after fetching
+        handleWeightedRandomRequested();
       } catch (error) {
         console.error('Error fetching words:', error);
       }
-      setLoading(false);
     };
 
     fetchWords();
-  }, []);
+  }, [isSentenceMode]);
 
   return (
     <div className="flex flex-1 flex-col justify-center items-center">
       {originalWord ? (
         <>
+          <label>Flipped mode</label>
+          <Switch
+            onClick={(e) => {
+              setIsInverse(!isInverse);
+            }}
+            aria-label="Automatic updates"
+          />
+          <label>Sentence mode</label>
+          <Switch
+            onClick={(e) => {
+              setIsSentenceMode(!isSentenceMode);
+            }}
+            aria-label="Automatic updates"
+          />
           <WordCard
             key={fetchWeightedTrigger}
             originalWord={originalWord}
             translatedWord={translatedWord}
-            handleRandomRequested={handleRandomRequested}
             handleWeightedRandomRequested={handleWeightedRandomRequested}
+            isInverse={isInverse}
           />
         </>
       ) : (

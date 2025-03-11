@@ -5,12 +5,12 @@ import Menu from '@components/Menu';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import Notification from './Notification';
+import { ThemeSwitcher } from 'components/ButtonThemeSwitcher';
 
 export default async function Header() {
   const supabase = createClient();
   const { data } = await supabase.auth.getUser();
   const email = data.user?.email || null;
-
   const logout = async () => {
     'use server';
     const supabase = createClient();
@@ -27,6 +27,7 @@ export default async function Header() {
         LexiLoop
       </Link>
       <div className="ml-auto flex items-center">
+        <ThemeSwitcher />
         <Notification />
         <UserMenu email={email} mode="header" logout={logout} />
       </div>

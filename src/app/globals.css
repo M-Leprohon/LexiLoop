@@ -59,3 +59,8 @@
 input[type='text']:active {
   font-size: 16px;
 }
+
+html.dark {
+  background-color: theme("colors.darkBackground");
+  color: white; /* Optional: Adjust text color */
+}

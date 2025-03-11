@@ -20,7 +20,7 @@ export default function UserMenu({ mode, email, logout }: UserMenuProps) {
           <form action="logout">
             <button
               formAction={logout}
-              className="text-black hover:text-pink transition duration-100 ease-in-out"
+              className="hover:text-pink transition duration-100 ease-in-out"
             >
               Logout
             </button>
