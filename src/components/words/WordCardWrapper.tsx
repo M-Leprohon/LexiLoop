@@ -7,9 +7,14 @@ import { useLoading } from '@context/LoadingContext';
 import { Switch } from '@nextui-org/react';
 import { useInverse } from '@context/InverseContext';
 
-export const WordCardWrapper = () => {
+interface WordCardWrapperProps {
+  originalWord?: string;
+  translatedWord?: string;
+}
+
+export const WordCardWrapper = (props: WordCardWrapperProps) => {
   const [originalWord, setOriginalWord] = useState('');
-  const [translatedWord, setTranslatedWord] = useState<string>('');
+  const [translatedWord, setTranslatedWord] = useState('');
   const [fetchWeightedTrigger, setFetchWeightedTrigger] = useState(0);
   const [words, setWords] = useState<Word[]>([]);
   const { isLoading, setLoading } = useLoading();
@@ -37,8 +42,17 @@ export const WordCardWrapper = () => {
 
       setTimeout(() => {
         if (data.word) {
-          setOriginalWord(data.word.original_word);
-          setTranslatedWord(data.word.translated_word);
+          if (props.originalWord) {
+            setOriginalWord(props.originalWord || '');
+            setTranslatedWord(props.translatedWord || '');
+
+            //unset props, we're entering random mode
+            props.originalWord = '';
+            props.translatedWord = '';
+          } else {
+            setOriginalWord(data.word.original_word);
+            setTranslatedWord(data.word.translated_word);
+          }
         } // Ensure a new object reference
         setLoading(false);
         // Mount new card with fresh word

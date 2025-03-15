@@ -20,7 +20,6 @@ export default async function TranslationShow({
   //const url = await randomWord();
   if (
     word?.translated_word == 'notTranslated' ||
-    word?.translated_word == 'notTranslated' ||
     word?.translated_word == null
   ) {
     redirect(`/word/${params.slug}/translate`);
