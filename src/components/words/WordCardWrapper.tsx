@@ -88,20 +88,6 @@ export const WordCardWrapper = (props: WordCardWrapperProps) => {
     <div className="flex flex-1 flex-col justify-center items-center">
       {originalWord ? (
         <>
-          <label>Flipped mode</label>
-          <Switch
-            onClick={(e) => {
-              setIsInverse(!isInverse);
-            }}
-            aria-label="Automatic updates"
-          />
-          <label>Sentence mode</label>
-          <Switch
-            onClick={(e) => {
-              setIsSentenceMode(!isSentenceMode);
-            }}
-            aria-label="Automatic updates"
-          />
           <WordCard
             key={fetchWeightedTrigger}
             originalWord={originalWord}
@@ -109,6 +95,22 @@ export const WordCardWrapper = (props: WordCardWrapperProps) => {
             handleWeightedRandomRequested={handleWeightedRandomRequested}
             isInverse={isInverse}
           />
+          <div className="flex mt-10 space-x-6">
+            <div className="flex flex-col items-center">
+              <label className="text-center mb-2">Flipped mode</label>
+              <Switch
+                onClick={() => setIsInverse(!isInverse)}
+                aria-label="Automatic updates"
+              />
+            </div>
+            <div className="flex flex-col items-center">
+              <label className="text-center mb-2">Sentence mode</label>
+              <Switch
+                onClick={() => setIsSentenceMode(!isSentenceMode)}
+                aria-label="Automatic updates"
+              />
+            </div>
+          </div>
         </>
       ) : (
         <p>Loading...</p>
