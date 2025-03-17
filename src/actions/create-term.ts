@@ -49,12 +49,15 @@ export async function createTerm(
   const { data, error } = await supabase.auth.getUser();
   console.log(data.user?.id);
 
-  const encodedWord = encodeURI(result.data.original_word);
+  const spaceLessWordCapitalized =
+    result.data.original_word.charAt(0).toUpperCase() +
+    result.data.original_word.slice(1).trimEnd();
+  const encodedWord = encodeURI(spaceLessWordCapitalized);
 
   try {
     console.log('we are trying');
     const error = await supabase.from('word').insert({
-      original_word: result.data.original_word,
+      original_word: spaceLessWordCapitalized,
       translated_word: 'notTranslated',
       familiarity: 0,
       userid: data.user?.id,
