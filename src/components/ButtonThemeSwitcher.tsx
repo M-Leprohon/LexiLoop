@@ -27,8 +27,20 @@ export function ThemeSwitcher() {
         onChange={handleSetTheme}
         size="lg"
         color="secondary"
-        startContent={<BsMoon className="w-5 h-5" />}
-        endContent={<BsSun className="w-5 h-5" />}
+        startContent={
+          theme === 'dark' ? (
+            <BsMoon className="w-5 h-5" />
+          ) : (
+            <BsSun className="w-5 h-5" />
+          )
+        }
+        endContent={
+          theme === 'dark' ? (
+            <BsMoon className="w-5 h-5" />
+          ) : (
+            <BsSun className="w-5 h-5" />
+          )
+        }
       />
     </div>
   );

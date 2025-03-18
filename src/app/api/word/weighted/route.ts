@@ -33,14 +33,16 @@ export const selectWord = (
   words: Word[],
   k: number = 1.0,
   c: number = 5,
-  epsilon: number = 0.1
+  epsilon: number = 0.1,
+  temperature: number = 2
 ): Word | null => {
   if (words.length === 0) return null;
 
   // Compute weights using inverse familiarity probability
   const weights = words.map((w) => ({
     word: w,
-    weight: sigmoid(parseInt(w.familiarity), k, c) + epsilon, // Ensure minimum probability
+    weight:
+      Math.exp(-sigmoid(parseInt(w.familiarity), k, c) / temperature) + epsilon,
   }));
 
   // Normalize weights
