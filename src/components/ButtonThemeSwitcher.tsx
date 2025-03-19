@@ -22,26 +22,13 @@ export function ThemeSwitcher() {
 
   return (
     <div>
-      <Switch
-        checked={theme === 'dark'}
-        onChange={handleSetTheme}
-        size="lg"
-        color="secondary"
-        startContent={
-          theme === 'dark' ? (
-            <BsMoon className="w-5 h-5" />
-          ) : (
-            <BsSun className="w-5 h-5" />
-          )
-        }
-        endContent={
-          theme === 'dark' ? (
-            <BsMoon className="w-5 h-5" />
-          ) : (
-            <BsSun className="w-5 h-5" />
-          )
-        }
-      />
+      <div onClick={handleSetTheme}>
+        {theme === 'light' ? (
+          <BsMoon className="w-5 h-5 mr-5 cursor-pointer" />
+        ) : (
+          <BsSun className="w-5 h-5 mr-5 cursor-pointer" />
+        )}
+      </div>
     </div>
   );
 }
