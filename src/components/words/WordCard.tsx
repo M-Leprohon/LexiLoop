@@ -49,12 +49,12 @@ export const WordCard = ({
             <motion.div
               transition={{ duration: 0.7 }}
               animate={{ rotateY: flip ? 0 : 180 }}
-              className="Card text-shadow dark:text-gray-700 text-gray-700 @apply shadow-[rgba(0,0,0,0.19)_0px_10px_20px,rgba(0,0,0,0.23)_0px_6px_6px] @apply bg-[#8EC5FC] bg-[linear-gradient(62deg,#8EC5FC_0%,#E0C3FC_100%)] md:w-48 w-full flex-1 flex flex-col justify-center items-center rounded-2xl text-4xl break-all hyphens-auto whitespace-normal"
+              className="Card text-shadow dark:text-gray-700 text-gray-700 @apply shadow-[rgba(0,0,0,0.19)_0px_10px_20px,rgba(0,0,0,0.23)_0px_6px_6px] @apply bg-[#8EC5FC] bg-[linear-gradient(62deg,#8EC5FC_0%,#E0C3FC_100%)] md:w-48 w-full flex-1 flex flex-col justify-center items-center rounded-2xl text-3xl break-all hyphens-auto whitespace-norma p-5"
             >
               <motion.div
                 transition={{ duration: 0.7 }}
                 animate={{ rotateY: flip ? 0 : 180 }}
-                className="front absolute"
+                className="front absolute text-center px-4"
               >
                 {isInverse ? translatedWord : originalWord}
               </motion.div>
@@ -63,7 +63,7 @@ export const WordCard = ({
                 animate={{ rotateY: flip ? 180 : 0 }}
                 // style={{ display: flip ? "none" : "block" }}
                 transition={{ duration: 0.7 }}
-                className="back absolute"
+                className="back absolute text-center px-4"
               >
                 {isInverse ? originalWord : translatedWord}
               </motion.div>
