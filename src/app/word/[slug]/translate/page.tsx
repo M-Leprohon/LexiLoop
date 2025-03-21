@@ -27,7 +27,9 @@ export default async function WordShow({ params }: WordShowProps) {
   return (
     <>
       <div className="flex justify-center">
-        <h1 className="text-6xl">{decodedWord}</h1>
+        <h1 className="text-5xl break-words text-center max-w-full overflow-hidden">
+          {decodedWord}
+        </h1>
       </div>
       <div className="flex justify-center mt-8">
         <div className="w-10/12 md:w-8/12 lg:w-6/12">
